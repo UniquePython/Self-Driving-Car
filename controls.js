@@ -1,30 +1,26 @@
-class Controls{
-    constructor(){
+class Controls {
+    constructor() {
         this.forward = false;
         this.reverse = false;
         this.left = false;
         this.right = false;
 
         this.#addKeyboardListeners();
-        }
-    
+    }
+
     #addKeyboardListeners() {
+        const keyMapping = {
+            "ArrowUp": "forward",
+            "ArrowDown": "reverse",
+            "ArrowLeft": "left",
+            "ArrowRight": "right"
+        };
+
         const KeyState = (key, state) => {
-            switch(key){
-                case "ArrowUp":
-                    this.forward = state;
-                    break;
-                case "ArrowDown":
-                    this.reverse = state;
-                    break;
-                case "ArrowLeft":
-                    this.left = state;
-                    break;
-                case "ArrowRight":
-                    this.right = state;
-                    break;
+            if (keyMapping[key]) {
+                this[keyMapping[key]] = state;
             }
-        }
+        };
 
         document.onkeydown = (event) => KeyState(event.key, true);
         document.onkeyup = (event) => KeyState(event.key, false);
