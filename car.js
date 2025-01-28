@@ -6,10 +6,11 @@ class Car{
         this.height = height;
 
         this.speed = 0;
-        this.acceleration = 0.1;
-        this.maxSpeed = 1.5;
-        this.maxReverseSpeed = -0.75;
-        this.friction = 0.025;
+        this.acceleration = 0.2;
+        this.reverseAcceleration = -0.1;
+        this.maxSpeed = 2;
+        this.maxReverseSpeed = -1;
+        this.friction = 0.1;
 
         this.controls = new Controls();
     }
@@ -19,7 +20,7 @@ class Car{
             this.speed += this.acceleration;
         }
         if(this.controls.reverse){
-            this.speed -= this.acceleration;
+            this.speed -= this.reverseAcceleration;
         }
 
         if(this.speed>this.maxSpeed){
