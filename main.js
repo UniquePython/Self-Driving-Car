@@ -3,7 +3,7 @@ canvas.width = 200;
 
 const ctx = canvas.getContext('2d');
 const road = new Road(canvas.width / 2, canvas.width*0.925);
-const car = new Car(road.getLaneCenter(1), 200, 30, 50, "PLAYER");
+const car = new Car(road.getLaneCenter(1), 200, 30, 50, "AI");
 const traffic = [
     new Car(road.getLaneCenter(Math.floor(Math.random() * 3)), -100, 30, 50, "DUMMY", Math.random() * 2, (Math.floor(Math.random() * 3) + 1) / 10 + 0.1),
 ];

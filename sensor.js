@@ -1,8 +1,9 @@
 class Sensor{
     constructor(car){
         this.car = car;
-        this.rayCount = 3;
-        this.raySpread = Math.PI/4;
+        this.rayCount = 7;
+        this.rayLength = 100;
+        this.raySpread = Math.PI/1.5;
 
         this.rays=[];
         this.readings = [];
@@ -26,15 +27,8 @@ class Sensor{
                                                 this.rayCount==1 ? 0.5:i/(this.rayCount-1))
                                                 + this.car.angle;
 
-            let rayLength
-            if (i === 0 || i === 2) {
-                rayLength = 130;
-            } else {
-                rayLength = 190;
-            }
-
             const start = {x : this.car.x, y : this.car.y};
-            const end = {x : this.car.x - Math.sin(rayAngle)*rayLength, y : this.car.y - Math.cos(rayAngle)*rayLength};
+            const end = {x : this.car.x - Math.sin(rayAngle)*this.rayLength, y : this.car.y - Math.cos(rayAngle)*this.rayLength};
 
             this.rays.push([start, end]);
         }
