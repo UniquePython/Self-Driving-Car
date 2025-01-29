@@ -15,20 +15,20 @@ class Car {
 
         this.isDamaged = false;
 
-        if( controlType!="DUMMY"){
+        if(controlType!="DUMMY"){
             this.sensor = new Sensor(this);
         }
         this.controls = new Controls(controlType);
     }
 
-    update(roadBorders) {
+    update(roadBorders, traffic) {
         if (!this.isDamaged) {
             this.#move();
             this.polygon = this.#createPolygon();
-            this.isDamaged = this.#assessDamage(roadBorders);
+            this.isDamaged = this.#assessDamage(roadBorders, traffic);
         }
         if(this.sensor){
-            this.sensor.update(roadBorders);
+            this.sensor.update(roadBorders, traffic);
         }
     }
 
@@ -102,21 +102,27 @@ class Car {
         }
     }
 
-    #assessDamage(roadBorders) {
+    #assessDamage(roadBorders, traffic) {
         for (let i = 0; i < roadBorders.length; i++) {
             if (polysIntersect(this.polygon, roadBorders[i])) {
+                return true;
+            }
+        }
+        for (let i = 0; i < traffic.length; i++) {
+            if (polysIntersect(this.polygon, traffic[i].polygon)) {
+                traffic[i].isDamaged = true;
                 return true;
             }
         }
         return false;
     }
 
-    draw(ctx) {
+    draw(ctx, color) {
         if(this.isDamaged){
             ctx.fillStyle = "red";
         }
         else{
-            ctx.fillStyle = "green";
+            ctx.fillStyle = color;
         }
         ctx.beginPath();
         ctx.moveTo(this.polygon[0].x, this.polygon[0].y);
