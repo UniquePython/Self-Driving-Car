@@ -1,22 +1,24 @@
 class Car {
-    constructor(x, y, width, height) {
+    constructor(x, y, width, height, controlType, maxSpeed = 2, acceleration = 0.2) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
 
         this.speed = 0;
-        this.acceleration = 0.2;
+        this.acceleration = acceleration;
         this.reverseAcceleration = -0.3;
-        this.maxSpeed = 2;
+        this.maxSpeed = maxSpeed;
         this.maxReverseSpeed = -1;
         this.friction = 0.08;
         this.angle = 0;
 
         this.isDamaged = false;
 
-        this.sensor = new Sensor(this);
-        this.controls = new Controls();
+        if( controlType!="DUMMY"){
+            this.sensor = new Sensor(this);
+        }
+        this.controls = new Controls(controlType);
     }
 
     update(roadBorders) {
@@ -25,7 +27,9 @@ class Car {
             this.polygon = this.#createPolygon();
             this.isDamaged = this.#assessDamage(roadBorders);
         }
-        this.sensor.update(roadBorders);
+        if(this.sensor){
+            this.sensor.update(roadBorders);
+        }
     }
 
     #createPolygon() {
@@ -122,6 +126,8 @@ class Car {
         }
         ctx.fill();
 
-        this.sensor.draw(ctx);
+        if(this.sensor){
+            this.sensor.draw(ctx);
+        }
     }
 }
