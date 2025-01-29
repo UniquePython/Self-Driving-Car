@@ -17,9 +17,9 @@ class Car {
         this.controls = new Controls();
     }
 
-    update() {
+    update(roadBorders) {
         this.#move();
-        this.sensor.update();
+        this.sensor.update(roadBorders);
     }
 
     #move() {
@@ -79,7 +79,7 @@ class Car {
             this.width,
             this.height
         );
-        ctx.fillStyle = 'red';
+        ctx.fillStyle = 'blue';
         ctx.fill();
 
         ctx.restore();
