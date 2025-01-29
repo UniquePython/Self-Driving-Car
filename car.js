@@ -10,7 +10,7 @@ class Car {
         this.reverseAcceleration = -0.1;
         this.maxSpeed = 2;
         this.maxReverseSpeed = -1;
-        this.friction = 0.05;
+        this.friction = 0.01;
         this.angle = 0;
 
         this.controls = new Controls();

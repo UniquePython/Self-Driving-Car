@@ -1,8 +1,8 @@
 class Road {
-    constructor(x, width, lane = 4) {
+    constructor(x, width, laneCount = 3) {
         this.x = x;
         this.width = width;
-        this.lane = lane;
+        this.laneCount = laneCount;
 
         this.left = x - width / 2;
         this.right = x + width / 2;
@@ -11,6 +11,11 @@ class Road {
 
         this.top = -inf;
         this.bottom = inf;
+    }
+
+    getLaneCenter(laneIndex){
+        const laneWidth = this.width / this.laneCount;
+        return this.left+laneWidth/2 + Math.min(laneIndex, this.laneCount-1)*laneWidth;
     }
 
     draw(ctx) {
@@ -25,8 +30,8 @@ class Road {
         ctx.stroke();
 
         ctx.strokeStyle = 'white';
-        for(let i = 1; i < this.lane; i++){
-            const x = linearInterpolate(this.left, this.right, i / this.lane);
+        for(let i = 1; i < this.laneCount; i++){
+            const x = linearInterpolate(this.left, this.right, i / this.laneCount);
 
             ctx.beginPath();
             ctx.moveTo(x, this.top);
