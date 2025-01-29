@@ -7,10 +7,10 @@ class Car {
 
         this.speed = 0;
         this.acceleration = 0.2;
-        this.reverseAcceleration = -0.1;
+        this.reverseAcceleration = -0.3;
         this.maxSpeed = 2;
         this.maxReverseSpeed = -1;
-        this.friction = 0.01;
+        this.friction = 0.08;
         this.angle = 0;
 
         this.controls = new Controls();
@@ -77,6 +77,7 @@ class Car {
             this.width,
             this.height
         );
+        ctx.fillStyle = 'red';
         ctx.fill();
 
         ctx.restore();
