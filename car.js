@@ -1,12 +1,12 @@
 class Car {
-    constructor(x, y, width, height, controlType, maxSpeed = 2, acceleration = 0.2) {
+    constructor(x, y, width, height, controlType, maxSpeed = 2.5) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
 
         this.speed = 0;
-        this.acceleration = acceleration;
+        this.acceleration = 0.2;
         this.reverseAcceleration = -0.3;
         this.maxSpeed = maxSpeed;
         this.maxReverseSpeed = -1;
@@ -129,7 +129,7 @@ class Car {
         return false;
     }
 
-    draw(ctx, color) {
+    draw(ctx, color, drawSensor = false) {
         if(this.isDamaged){
             ctx.fillStyle = "red";
         }
@@ -144,7 +144,7 @@ class Car {
         }
         ctx.fill();
 
-        if(this.sensor){
+        if(this.sensor && drawSensor){
             this.sensor.draw(ctx);
         }
     }

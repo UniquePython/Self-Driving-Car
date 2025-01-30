@@ -13,6 +13,19 @@ class NeuralNetwork{
         }
         return outputs;
     }
+
+    static mutate(network, amount=Math.random()){
+        network.levels.forEach(level => {
+            for(let i=0; i < level.biases.length; i++){
+                level.biases[i] = linearInterpolate(level.biases[i], Math.random() * 2 - 1, amount);
+            }
+            for(let j=0; j < level.weights.length; j++){
+                for(let k=0; k < level.weights[j]; k++){
+                    level.weights[j][k] = linearInterpolate(level.weights[j][k], Math.random() * 2 - 1, amount);
+                }
+            }
+        });
+    }
 }
 
 
